@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Agregar Comunicación</h3>
+    <hr>
+    <div class="container"><br>
+        <form action="/guardapqrs" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    {{mensaje}}
+                    <label for="numero"><b>Id Comunicaciones</b></label><br>
+                    <input required type="number" class="form-control" name="numero">
+                    <br>
+                    <label for="idcliente"><b>id Cliente</b></label>
+                    <input required type="number" class="form-control" name="idcliente">
+                    <br>
+                    <label for="fecha"><b>Fecha</b></label><br>
+                    <input required type="date" class="form-control" name="fecha">
+                    <br>
+                    </div>
+                    <div class="col-6">
+                    <label for="tipo"><b>Tipo</b></label>
+                    <select required class="form-control" name="tipo">
+                        <option value="PETICION">PETICIÓN</option>
+                        <option value="QUEJA">QUEJA</option>
+                        <option value="RECOMENDACION">RECOMENDACIÓN</option>
+                        <option value="SUGERENCIA">SUGERENCIA</option>
+                        </option>
+                    </select>
+                    <br>
+                    <label for="descripcion"><b>Descripcion</b></label>
+                    <input required type="text" class="form-control" name="descripcion">
+                    <br>
+                    <label for="estado"><b>Estado</b></label><br>
+                    <select required class="form-control" name="estado">
+                        <option value="NO SOLUCIONADO">NO SOLUCIONADO</option>
+                        <option value="SOLUCIONADO">SOLUCIONADO</option>
+                        <option value="EN PROCESO">EN PROCESO</option>
+                        </option>
+                    </select>
+                    <br>
+                    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                    <a href="/comunicaciones" class="btn btn-primary"> Regresar</a><br><br>
+                </div>
+        </form>
+    </div>

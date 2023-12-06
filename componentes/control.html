@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control | Maravillas Naturales</title>
+
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+    <link rel="stylesheet" href="componentes/formato_webapp.css">
+
+</head>
+<body>
+
+    <main id="padre">
+
+        <header id="panel_izq">
+
+            <figure id="marca">
+                <img src="componentes/simbolo_w.png" alt="hotel maravillas naturales">
+            </figure>
+
+            <nav id="menu_secundario">
+                <ul id="opcs_menu">
+                    <li>INVENTARIO</li>
+                    <li>PERSONAL</li>
+                    <li>CORREO</li>
+                </ul>
+            </nav>
+
+            <p id="firma">TPS-01 | v1.0-2023</p>
+        </header>
+
+        <section id="mosaicos">
+
+            <article id="reservas" class="cajon">
+
+                <h2>RESERVAS</h2>
+
+                <form name="forma_reservas" id="forma_reservas" action="/buscaReservas" method="post">
+                    
+                    <input type="text" name="cliente_reserva" id="cliente_reserva" maxlength="15" minlength="6" pattern="[0-9A-Z]{6,15}" autocapitalize="on" title="Solo letras en mayúsculas y números." placeholder="# de id / # reserva" required>
+
+                    <button type="submit" id="btn_reserva">
+                        <i class="lni lni-search"></i>
+                    </button>
+
+                </form>
+
+                <a href="nueva_reserva.html" target="_self" id="btn_nueva_reserva" class="btn-accion"><i class="lni lni-circle-plus"></i> Reserva</a>
+
+            </article>
+
+            <article id="clientes" class="cajon">
+
+                <h2>CLIENTES</h2>
+
+                <a href="nuevo_cliente.html" target="_self" id="btn_nuevo_cliente" class="btn-accion"><i class="lni lni-circle-plus"></i> Cliente</a>
+
+                <form name="forma_clientes" id="forma_clientes" action="/buscaClientes" method="post">
+                    
+                    <input type="text" name="cliente_nombre" id="cliente_nombre" maxlength="24" minlength="2" pattern="[A-Z\s]{2,24}" autocapitalize="on" title="Solo letras en mayúsculas." placeholder="Ej. Nombre" required>
+
+                    <button type="submit" id="btn_cliente">
+                        <i class="lni lni-search"></i>
+                    </button>
+
+                </form>
+
+            </article>
+
+
+
+            <article class="cajon">
+                <h2></h2>
+            </article>
+            <article class="cajon">
+                <h2></h2>
+            </article>
+
+        </section>
+
+    </main>
+    
+</body>
+</html>

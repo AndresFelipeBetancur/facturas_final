@@ -1,0 +1,56 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/actualizacomanda" method="post" enctype="multipart/form-data">
+        <h3>Modificar Venta de Productos</h3>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                <label for="numero"><b>Comanda</b></label><br>
+                <input readonly value="{{com[0]}}" class="form-control" type="number" name="numero">
+                {{mensaje}}
+                <br>
+                <label for="idcodigo"><b>Categoria</b></label>
+                <input value="{{com[1]}}" class="form-control" type="text" name="idcodigo">
+                <br>
+                <label for="descripItem"><b>Producto</b></label>
+                <input required value="{{com[2]}}" class="form-control" type="text" name="descripItem">
+                <br>
+                <label for="idregistro"><b>Registro</b></label>
+                <input required value="{{com[3]}}" class="form-control" type="number" name="idregistro">
+                <br>
+            </div>
+            <div class="col-4">
+                <label for="idcliente"><b>Cliente</b></label>
+                <input required value="{{com[4]}}" class="form-control" type="number" name="idcliente">
+                <br>
+                <label for="idhabitacion"><b>Habitación</b></label>
+                <input required value="{{com[5]}}" class="form-control" type="text" name="idhabitacion">
+                <br>
+                <label for="fecha"><b>Fecha</b></label>
+                <input required value="{{com[6]}}" class="form-control" type="text" name="fecha">
+                <br>
+                <label for="cantidad"><b>Cantidad</b></label>
+                <input required value="{{com[7]}}" class="form-control" type="number" name="cantidad">
+                <br>
+            </div>
+            <div class="col-4">
+                <label for="valor"><b>Valor</b></label>
+                <input required value="{{com[8]}}" class="form-control" type="number" name="valor">
+                <br>
+                <label for="subtotal"><b>Subtotal</b></label>
+                <input required step="any" value="{{com[9]}}" class="form-control" type="number" name="subtotal">
+                <br>
+                <label for="estado"><b>Estado</b></label><br>
+                <input required value="{{com[10]}}" class="form-control" type="text" name="estado">
+                <br>
+                <label for="foto"><b>Foto</b></label><br>
+                <input value="{{com[11]}}" class="form-control" type="file" name="foto">
+                <br>
+                <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                <a href="/comandas" class="btn btn-primary"> Regresar</a>
+            </div>
+    </form>
+</div>
+</body>
+
+</html>

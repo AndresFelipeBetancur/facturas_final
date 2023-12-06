@@ -1,0 +1,42 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Alojamientos</h3>
+    <hr>
+    <a href="/agregahabitacion" class="btn btn-success btn-sm">
+        <i class="fas fa-bed"></i></i> Nuevo alojamiento</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Id Alojamiento</th>
+                <th>Tipo</th>
+                <th>Descripción</th>
+                <th>Capacidad</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Foto</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hab in res %}
+            <tr>
+                <td>{{hab[0]}}</td>
+                <td>{{hab[1]}}</td>
+                <td>{{hab[2]}}</td>
+                <td>{{hab[3]}}</td>
+                <td>{{hab[4]}}</td>
+                <td>{{hab[5]}}</td>
+                <td><img width="50" height="50" src="/uploads/{{hab[6]}}" alt=""></td>
+                <td>
+                    <a href="/modificahabitacion/{{hab[0]}}" class="btn btn-warning btn-sm"><i
+                            class="bi bi-pencil-square"></i></a>
+                    <a onclick="return confirm('¿Seguro desea eliminar este habitación?')"
+                        href="/borrahabitacion/{{hab[0]}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div id="resultado"><br>
+        <h5>Resultado Búsqueda por Cliente</h5>
+        <hr>
+        {% if (miData) %} <!--Si existe-->
+        <section>
+            <p>
+                Id Cliente: <strong>{{miData[0]}}</strong>
+            </p>
+            <p>
+                Nombre: <strong>{{miData[1]}}</strong>
+            </p>
+            <p>
+                Nacionalidad <strong>{{miData[2]}}</strong>
+            </p>
+            <p>
+                Celular: <strong>{{miData[3]}}</strong>
+            </p>
+            <p>
+                Email: <strong>{{miData[4]}}</strong>
+            </p>
+            <p>
+                Fecha Nacimiento: <strong>{{miData[5]}}</strong>
+            </p>
+        </section>
+
+        {% else %}
+    <div class="alert alert-warning" role="alert">
+        <strong>Atención!</strong> No hay resultados para la búsqueda. <a href="/principal" class="alert-link">Intente de
+            nuevo</a>.
+    </div>
+        {% endif %}
+
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+{% include 'header.html' %}
+<div class="container"><br>
+<h3>Modificar Clientes</h3>
+<hr>
+    <div class="container"><br>
+        <form action="/actualizacliente" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <label for="numero"><b>Id cliente</b></label>
+                    <input readonly value="{{clie[0]}}" class="form-control" type="number" name="numero">
+                    {{mensaje}}
+                    <br>
+                    <label for="nombre"><b>Nombre</b></label><br>
+                    <input value="{{clie[1]}}" class="form-control" type="text" name="nombre">
+                    <br>
+                    <label for="nacionalidad"><b>Nacionalidad</b></label>
+                    <input value="{{clie[2]}}" class="form-control" type="text" name="nacionalidad">
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="celular"><b>Celular</b></label>
+                    <input required value="{{clie[3]}}" class="form-control" type="text" name="celular">
+                    <br>
+                    <label for="email"><b>Email</b></label>
+                    <input required value="{{clie[4]}}" class="form-control" type="text" name="email">
+                    <br>
+                    <label for="fnacimiento"><b>Fecha Nacimiento</b></label>
+                    <input required value="{{clie[5]}}" class="form-control" type="text" \ name="fnacimiento">
+                    <br><br>
+                    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                    <a href="/clientes" class="btn btn-primary"> regresar</a>
+                </div>
+        </form>
+    </div><br>

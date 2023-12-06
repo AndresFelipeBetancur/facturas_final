@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/guardaproducto" method="post" enctype="multipart/form-data">
+      <h3>Datos de factura</h3>
+      <hr>
+      <div class="row">
+        <div class="col-6">
+          <div class="col-6">
+            {{mensaje}}
+            <label for="numero"><b>Código factura</b></label><br>
+            <input required type="number" class="form-control" name="numero">
+            <br>
+              <br><br>
+              <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+              <a href="/productos" class="btn btn-primary"> Regresar</a><br><br>
+              </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{% include 'header.html' %}
+<div class="container"><br>
+        <section id="mosaicos">
+        
+            <article id="reservas" class="cajon">
+                <h3>Reservas</h3>
+        
+                <form name="forma_reservas" id="forma_reservas" action="/buscarReservas" method="post">
+                    <input type="text" name="buscar" id="cliente_reserva" maxlength="3" minlength="1" pattern="[0-9A-Z]{1,3}"
+                        autocapitalize="on" title="Solo letras en mayúsculas y números" placeholder="# ID / # RESERVA" required>
+                    <button type="submit" id="btn_reserva"><i class="lni lni-search"></i></button>
+                </form>
+                <a href="/agregareserva" style="color:rgb(242, 247, 242)" target="_self" id="btn_nueva_reserva" class="btn-accion"><i class="lni lni-circle-plus"></i> Nueva Reserva</a>
+            </article>
+        
+        
+            <article id="clientes" class="cajon">
+                <h3>Clientes</h3>
+                <form name="forma_clientes" id="forma_clientes" action="/buscarClientes" method="post">
+                    <input type="text" name="nombre" id="cliente" maxlength="20" minlength="2" pattern="[A-Z ]{2,20}"
+                        autocapitalize="on" title="Solo letras en mayúsculas y números" placeholder="Ej. NOMBRE" required>
+                    <button type="submit" id="btn_cliente"><i class="lni lni-search"></i></button>
+                </form>
+                <a href="/agregacliente" style="color:rgb(242, 247, 242)" target="_self" id="btn_nuevo_cliente" class="btn-accion"><i class="lni lni-circle-plus"></i>Nuevo Cliente</a>
+            </article>
+
+            <article id="vehiculos" class="cajon">
+                <h3>Vehículos</h3>
+                <form name="forma_vehiculos" id="forma_vehiculos" action="/buscarauto" method="post">
+                    <input type="text" name="marca" id="" maxlength="15" minlen="6 " 2a24ern="[A-Z ]{2,24}" autocapitalize="on" title="Solo letras mayusculas." placeholder="NOMBRE MARCA" required>
+                    <button type="submit" id="btn_vehiculo"><i class="lni lni-search"></i></button>
+                </form>
+                <a href="/catalogo" style="color:rgb(242, 247, 242)" target="_self" id="btn_nuevo_vehiculo" class="btn-accion"><i
+                        class="lni lni-circle-plus"></i>Catalogo</a>
+            </article>
+
+             
+            <article id="ventas" class="cajon">
+                            <h3>Ventas</h3>
+                            <form name="forma_ventas" id="forma_ventas" action="/buscarcomanda" method="post">
+                                <input type="text" name="buscar" id="cliente_reserva" maxlength="15" minlength="3" pattern="[0-9A-Z]{15,3}"
+                                    autocapitalize="on" title="Solo letras en mayúsculas y números" placeholder="# ID / # VENTAS" required>
+                                <button type="submit" id="btn_venta"><i class="lni lni-search"></i></button>
+                            </form>
+                            <a href="/agregacomanda" style="color:rgb(242, 247, 242)"  target="_self" id="btn_nueva_venta" class="btn-accion"><i
+                                    class="lni lni-circle-plus"></i>Nueva Venta</a>
+                        </article>
+                        
+                        <article id="facturacion" class="cajon">
+                            <h3>Facturación</h3>
+                            <form name="forma_facturacion" id="forma_facturacion" action="/buscafactura" method="post">
+                                <input type="text" name="idfactura" id="facturacion" autocapitalize="on" title="Solo letras en mayúsculas y números" placeholder="# FACTURA" required>
+                                <button type="submit" id="btn_facturacion"><i class="lni lni-search"></i></button>
+                            </form>
+                            <a href="/facturas" style="color:rgb(242, 247, 242)" target="_self" id="btn_nueva_facturacion" class="btn-accion"><i
+                                    class="lni lni-circle-plus"></i>Generar Factura</a>
+                        </article>
+                        <article id="vehiculos" class="cajon">
+                        
+                            <h3>Comunicaciones</h3>
+                        
+                            <form name="forma_comunicaciones" id="forma_comunicaciones" action="/buscarpqrs" method="post">
+                                <input type="text" name="buscar" id="comunicacion" maxlength="50" minlength="6" pattern="[A-Z ]{6,50}"
+                                    autocapitalize="on" title="Solo letras en mayúsculas y números" placeholder="# ID CLIENTE" required>
+                                <button type="submit" id="btn_comunicacion"><i class="lni lni-search"></i></button>
+                            </form>
+                            <a href="/comunicaciones" style="color:rgb(242, 247, 242)" target="_self" id="btn_nueva_comunicacion" class="btn-accion"><i class="lni lni-circle-plus"></i>Nueva Comunicación</a>
+                        </article>
+                        </div>

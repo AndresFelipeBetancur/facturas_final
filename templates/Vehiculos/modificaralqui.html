@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Modificar Alquiler Vehículo</h3>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+    <form class="modificar" action="/modificaralquilerGuardar" method="post">
+        <label for="ID_Alquiler" class="etiqueta"><b>ID Alquiler</b></label>
+        <input type="text" name="ID_Alquiler" id="campo_usuario" readonly value="{{idalquiler[0]}}" class="form-control" required>  
+        <br><br>
+        <label for="placa" class="placa"><b>Placa</b></label>
+        <input type="text" name="placa" id="campo_usuario" readonly  value="{{idalquiler[1]}}"  class="form-control" required>  
+        <br><br>
+        <label for="ID_registro" class="ID_registro"><b>ID Registro</b></label>
+        <input type="text" name="ID_registro" id="campo_usuario" value="{{idalquiler[2]}}" class="form-control" required>  
+        <br><br>
+        <label for="num_licencia" class="num licencia"><b>Num Licencia</b></label>
+        <input type="number" name="num_licencia" id="campo_usuario" value="{{idalquiler[3]}}"   class="form-control" required>  
+        </div>
+        <div class="col-6">
+        <label for="fecha_alquiler" class="fecha alquiler"><b>Fecha Alquiler</b></label>
+        <input type="date" name="fecha_alquiler" id="campo_usuario" value="{{idalquiler[4]}}"  class="form-control" required>  
+        <br><br>
+        <label for="fecha_devolucion" class="fecha devolucion"><b>Fecha devolucion</b></label>
+        <input type="date" name="fecha_devolucion" id="campo_usuario" value="{{idalquiler[5]}}"  class="form-control" required>  
+        
+        <br><br>
+        <label for="ID_comanda" class="ID comanda"><b>ID Comanda</b></label>
+        <input type="text" name="ID_comanda" id="campo_usuario" value="{{idalquiler[6]}}"  class="form-control" required>  
+        
+        <br><br>
+        <label for="comentario" class="comentario"><b>Comentario</b></label>
+        <input type="text" name="comentario" id="campo_usuario" value="{{idalquiler[7]}}"  class="form-control" required>  
+        <br><br>
+        <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+        <a href="/alquiler" class="btn btn-primary"> Regresar</a><br><br>
+    </form>
+</body>
+</html>

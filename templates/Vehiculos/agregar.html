@@ -1,0 +1,48 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Agregar Nuevo Vehículo</h3>
+    <hr>
+    <div class="row">
+        <div class="col-4">
+    <form action="/agregar" method="post" class="formulario" enctype="multipart/form-data">
+        
+        <label for="placa">Placa</label>
+        <input type="text" name="Placa" id="" class="form-control"  required><br>
+        
+        <label for="tipo">Tipo</label>
+        <select required class="form-control" name="tipo">
+            <option value="CARRO">CARRO</option>
+            <option value="MOTO">MOTO</option>
+            </option>
+        </select>
+        <br>
+        <label for="marca">Marca</label>
+        <input type="text" name="Marca" id="" class="form-control"  required><br>
+
+        <label for="numOcupantes">Numero de ocupantes</label>
+        <input type="number" name="numOcupantes" id="" class="form-control"  required><br>
+        </div>
+        <div class="col-4"> 
+        <label for="estado">Estado</label>
+        <input type="text" name="estado" id="" class="form-control" value="DISPONIBLE" required><br> 
+        <label for="consumo">Consumo</label>
+        <input type="text" name="consumo" id="consumo"  class="form-control"   required><br>
+        <label for="soat">Soat</label>
+        <input type="date" name="soat" id="" class="form-control"  required><br>
+        <label for="tecno_mec">Tecno Mecanica</label>
+        <input type="date" name="tecno_mec" id="" class="form-control"  required><br>
+        </div>
+        <div class="col-4">
+        <label for="permiso">Permiso</label>
+        <input type="date" name="permiso" id="" class="form-control"  required><br>
+        <label for="kilometraje">Kilometraje</label>
+        <input type="number" name="kilometraje" id="" class="form-control"  required><br>
+        <label for="img">Imagen</label>
+        <input type="text" class="form-control" name="img"><br>
+        <label for="precio">Precio</label>
+        <input type="number" name="precio" id="" class="form-control"  required><br>
+        <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+        <a href="/catalogo" class="btn btn-primary"> Regresar</a><br><br>
+    </form>  
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Detalle de Ventas</h3>
+    <hr>
+    {% if (res) %}
+<div class="alert alert-success" role="alert">
+    <strong>Exito!</strong> Hay resultados para la búsqueda.
+</div>
+<!--CREAR UN FORMMULARIO PARA DETALLE DE COMPRA---> 
+<form action="/guardaventa" method="post">
+{{mensaje}}
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Comanda</th>
+                <th>Categoria</th>
+                <th>Producto</th>
+                <th>Registro</th>
+                <th>Cliente</th>
+                <th>Habitación</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Valor</th>
+                <th>Subtotal</th>
+                <th>Estado</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for com in res %}
+            <tr>
+                <td>{{com[0]}}</td>
+                <td>{{com[1]}}</td>
+                <td>{{com[2]}}</td>
+                <td>{{com[3]}}</td>
+                <td>{{com[4]}}</td>
+                <td>{{com[5]}}</td>
+                <td>{{com[6]}}</td>
+                <td>{{com[7]}}</td>
+                <td>{{com[8]}}</td>
+                <td>{{com[9]}}</td>
+                <td>{{com[10]}}</td>           
+                <td colspan="2">
+                    <a href="/modificacomanda/{{com[0]}}" class="btn btn-warning btn-sm"><i
+                            class="bi bi-pencil-square"></i></a>
+                    <a onclick="return confirm('¿Seguro elimina este coma?')" href="/borracomanda/{{com[0]}}"
+                        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+{% else %}
+
+<div class="alert alert-warning" role="alert">
+    <strong>Atención!</strong> No hay resultados para la búsqueda. <a href="/principal" class="alert-link">Intente de
+        nuevo</a>.
+</div>
+<tr>
+    {% endif %}
+</table>
+    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+    </form>
+</div>

@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+    <div class="container"><br>
+        <form action="/guardaregistro" method="post" enctype="multipart/form-data">
+            <h3>Datos del nuevo registro</h3>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    {{mensaje}}
+                    <label for="numero"><b>Id Registro</b></label><br>
+                    <input required type="number" class="form-control" name="numero">
+                    <br>
+                    <label for="idcliente"><b>Id Cliente</b></label><br>
+                    <input required type="text" class="form-control" name="idcliente" placeholder="No Documento">
+                    <br>
+                    <label for="idhabitacion"><b>Habitación</b></label>
+                    <input required type="text" class="form-control" name="idhabitacion">
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="fecha_inicio"><b>Fecha Llegada</b></label>
+                    <input required type="date" class="form-control" name="fecha_inicio">
+                    <br>
+                    <label for="fecha_final"><b>Fecha Salida</b></label>
+                    <input required type="date" class="form-control" name="fecha_final">
+                    <br>
+                    <label for="precio"><b>Precio</b></label>
+                    <input required type="number" class="form-control" name="precio">
+                    <br><br>
+                    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                    <a href="/registro" class="btn btn-primary"> Regresar</a><br><br>
+                </div>
+        </form>
+    </div>

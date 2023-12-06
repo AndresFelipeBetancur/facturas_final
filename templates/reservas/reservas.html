@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Reservas</h3><hr>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID Reserva</th>
+                <th>ID Cliente</th>
+                <th>Habitación</th>
+                <th>Fecha Llegada</th>
+                <th>Fecha Salida</th>
+                <th>Acompañantes</th>               
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reser in res %}
+            <tr>
+                <td>{{reser[0]}}</td>
+                <td>{{reser[1]}}</td>
+                <td>{{reser[2]}}</td>
+                <td>{{reser[3]}}</td>
+                <td>{{reser[4]}}</td>
+                <td>{{reser[5]}}</td>
+                <td>
+                <a href="/modificareserva/{{reser[0]}}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                <a onclick="return confirm('¿Esta seguro de que desea eliminar esta reserva')" href="borrareserva/{{reser[0]}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                </td>
+              
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>    
+</body>
+</html>

@@ -1,0 +1,189 @@
+* {
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+figure {
+    margin: 0;
+    padding: 0;
+}
+    figure img {
+        width: 100%;
+        margin: 0;
+    }
+body, html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+main#padre {
+    background-color: #fffbfb;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+section#mosaicos {
+    margin: 0;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+
+.cajon {
+    background-color: #F2F2F2;
+    border-radius: 11px;
+    box-shadow: 0 2px 11px rgba(3,3,3,0.4);
+    margin: 0;
+    padding: 1.6em;
+    
+}
+    .cajon input {
+        background-color: #bcbdc2;
+        border: none;
+        border-radius: 11px;
+        color: #FFF;
+        font-size: 15px;
+        margin: 9px 0;
+        padding: 9px 9px;
+    }
+        .cajon input::placeholder {
+            color: inherit;
+        }
+
+    .cajon button {
+        background: #038138;
+        border: none;
+        border-radius: 4em;
+        color: #D1D9FF;
+        font-size: 2em;
+        margin: 0;
+        padding: 9px 14px 4px 14px;
+        text-decoration: none;
+    }
+
+   
+
+    .btn-accion {
+        background-color: #353835;
+        border-radius: 3em;
+        color: #D1D9FF;
+        display: block;
+        font-size: 1.2em;
+        margin: 1em 0;
+        padding: 5px;
+        text-decoration: none;
+    }
+        .btn-accion i {
+            font-size: 2em;
+            margin-right: 40px;
+        }
+
+    .cajon h4 {
+        color: #04401E;
+        font-size: 2.3em;
+        font-weight: bold;
+        margin: 0;
+    }
+@media screen and (max-width: 1300px){
+    div.cuadro_princi{
+       height: 800px;
+       width: 45%;
+       gap: 10px;
+       padding: 10px;
+       margin:none;
+    }
+    div.catal{
+        width: 75%;
+        height: 35%;
+    }
+}
+img.panelcentral {
+    width: 100%;
+    height: 100%;
+}
+.catal .infocatal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+.NombreHotel{
+  display: flex;
+  justify-content: space-between;
+}
+  .NombreHotel h4{
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+.mitadcuadroarriba{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: space-between;
+    font-size: 18px;
+}
+.vehiculo{
+    width: 48%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.vehiculo h4{
+    font-size: 16;
+    margin: 5px;
+}
+#btn_mostrar_modulo_veh{
+    align-items: center;
+    font-size: 21px;
+    padding: 10px;
+  }
+main h4{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+   #btn_nueva_reserva {
+       text-decoration: none;
+   }
+
+   #btn_nuevo_cliente {
+       text-decoration: none;
+   }
+
+   #btn_nuevo_vehiculo {
+       text-decoration: none;
+   }
+
+   #btn_nueva_venta {
+       text-decoration: none;
+   }
+
+   #btn_nueva_facturacion {
+       text-decoration: none;
+   }
+
+   #btn_nueva_comunicacion {
+       text-decoration: none;
+   }

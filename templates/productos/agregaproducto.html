@@ -1,0 +1,43 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/guardaproducto" method="post" enctype="multipart/form-data">
+        <h3>Datos del nuevo producto/servicio</h3><hr>
+        <div class="row">
+            <div class="col-6">
+                {{mensaje}}
+                <label for="numero"><b>Código Producto/Servicio</b></label><br>
+                <input required type="number" class="form-control" name="numero">
+                <br>
+                <label for="nomProd"><b>Nombre del Producto/Servicio</b></label><br>
+                <input required type="text" class="form-control" name="nomProd">
+                <br>
+                <label for="descripcion"><b>Descripción</b></label>
+                <select required class="form-control" name="descripcion">
+                    <option value="PRODUCTO">PRODUCTO</option>
+                    <option value="SERVICIO">SERVICIO</option>
+                    </option>
+                </select>
+                <br>
+                <label for="cantidad"><b>Cantidad</b></label><br>
+                <input required type="number" class="form-control" name="cantidad" value="1">
+                <br></div>
+                <div class="col-6">
+                <label for="precio"><b>Precio</b></label><br>
+                <input required type="number" class="form-control"  name="precio" value="0">
+                <br>
+                <label for="iva"><b>Impuesto (IVA)</b></label><br>
+                <input required step="any" type="number" class="form-control" name="iva">
+                <br>
+                <label for="estado"><b>Estado</b></label><br>
+                <input readonly type="text" class="form-control" name="estado" value="DISPONIBLE">
+                <br>
+                <label for="foto"><b>Foto</b></label><br>
+                <input type="file" class="form-control" name="foto">
+                <br><br>
+                <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                <a href="/productos" class="btn btn-primary"> Regresar</a><br><br>
+            </div>   
+    </form>
+</div>  
+</body>
+</html>

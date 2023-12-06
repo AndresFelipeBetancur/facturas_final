@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+figure {
+    margin: 0;
+    padding: 0;
+}
+    figure img {
+        width: 100%;
+        margin: 0;
+    }
+body, html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 17px;
+}
+
+main#padre {
+    background-color: #EEE;
+    margin: 0;
+    min-height: 100vh;
+    padding: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+header#panel_izq {
+    background-color: #0D0D0D;
+    margin: 0;
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+    #panel_izq #marca {
+        width: 100px;
+    }
+    #panel_izq #opcs_menu {
+        color: #F2C12E;
+        margin: 0 0 5em 0;
+        padding: 0;
+    }
+        #opcs_menu li {
+            font-weight: bold;
+            list-style: none;
+            margin: 2em 0;
+            padding: 0;
+        }
+    #panel_izq #firma {
+        font-size: 11px;
+        color: #EEE;
+    }
+
+section#mosaicos {
+    margin: 0;
+    padding: 2em;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+
+.cajon {
+    background-color: #F2F2F2;
+    border-radius: 11px;
+    box-shadow: 0 2px 11px rgba(3,3,3,0.4);
+    margin: 0;
+    padding: 1.5em;
+}
+    .cajon input {
+        background-color: #5063BF;
+        border: none;
+        border-radius: 11px;
+        color: #FFF;
+        font-size: 21px;
+        margin: 21px 0;
+        padding: 21px 16px;
+    }
+        .cajon input::placeholder {
+            color: inherit;
+        }
+    .cajon button {
+        background: #021059;
+        border: none;
+        border-radius: 2em;
+        color: #D1D9FF;
+        font-size: 2em;
+        margin: 0;
+        padding: 11px 13px 9px 13px;
+    }
+
+    .btn-accion {
+        background-color: #1F318C;
+        border-radius: 3em;
+        color: #4961d5;
+        display: block;
+        font-size: 1.3em;
+        margin: 1em 0;
+        padding: 21px;
+        text-decoration: none;
+    }
+        .btn-accion i {
+            font-size: 2em;
+            margin-right: 11px;
+        }
+    .cajon h2 {
+        color: #04401E;
+        font-size: 2.3em;
+        font-weight: bold;
+        margin: 0;
+    }

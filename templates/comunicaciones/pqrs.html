@@ -1,0 +1,42 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Comunicaciones</h3><hr>
+    <a href="agregarpqrs" class="btn btn-success btn-sm">
+        <i class="bi bi-envelope-paper"></i>  Nueva comunicación</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>id Comunicación</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>tipo</th>
+                <th>Descripción</th>            
+                <th>Estado</th>
+               
+            <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comun in res %}
+            <tr>
+                <td>{{comun[0]}}</td>
+                <td>{{comun[1]}}</td>
+                <td>{{comun[2]}}</td>
+                <td>{{comun[3]}}</td>
+                <td>{{comun[4]}}</td>
+                <td>{{comun[5]}}</td>
+                <td>
+                <td>
+                    <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                <a onclick="return confirm('¿Seguro eliminar esta comunicación?')" href="#"
+                class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                </td>
+              
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>    
+</body>
+</html>

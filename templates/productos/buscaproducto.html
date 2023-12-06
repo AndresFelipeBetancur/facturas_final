@@ -1,0 +1,55 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div id="resultado"><br>
+        <h5>Buscar Producto</h5>
+        <hr>
+<div class="container"><br>
+<table class="table table-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+                <th>Producto</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>IVA</th>
+                <th>Estado</th>       
+                <th colspan="2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+         
+        {% if (miData) %}  
+        
+        <div class="alert alert-success" role="alert">
+            <strong>Exito!</strong> Hay resultados para la búsqueda.
+        </div>
+        <tr>
+            <td>{{miData[0]}}</td>
+            <td>{{miData[1]}}</td>
+            <td>{{miData[2]}}</td>
+            <td>{{miData[3]}}</td>
+            <td>{{miData[4]}}</td>
+            <td>{{miData[5]}}</td>
+            <td>{{miData[6]}}</td>
+            <td>
+                <a href="/modificaproducto/{{miData[0]}}" class="btn btn-warning btn-sm"><i
+                        class="bi bi-pencil-square"></i></a>
+                <a onclick="return confirm('¿Esta seguro de que desea eliminar esta reserva')"
+                    href="borraproducto/{{miData[0]}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+            </td>
+
+        {% else %}
+        
+        <div class="alert alert-warning" role="alert">
+            <strong>Atención!</strong> No hay resultados para la búsqueda. <a href="/principal" class="alert-link">Intente de nuevo</a>.
+        </div>
+        <tr>
+        {% endif %}
+    </tbody>
+</table>
+
+</body>
+
+</html>

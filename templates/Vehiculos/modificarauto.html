@@ -1,0 +1,40 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Modificar Vehículo</h3>
+    <hr>
+    <div class="row">
+    <div class="col-4">
+       <form class="modificar" action="/modificarGuardar" method="post" enctype="multipart/form-data">
+        <label for="placa"><b>Placa</b></label>
+        <input type="text" name="Placa" id="" readonly value="{{placa[0]}}"  class="form-control" required><br>
+        <label for="tipo"><b>Tipo</b></label>
+        <input type="text" name="tipo" id="" readonly value="{{placa[1]}}" class="form-control" required><br>
+        <label for="marca"><b>Marca</b></label>
+        <input type="text" name="Marca" id="" value="{{placa[2]}}" class="form-control" required><br>
+        <label for="numOcupantes"><b>Numero de ocupantes</b></label>
+        <input type="text" name="numOcupantes" id="" value="{{placa[3]}}" class="form-control" required><br>
+        </div>
+        <div class="col-4">
+        <label for="estado"><b>Estado</b></label>
+        <input type="text" name="estado" id="" value="{{placa[4]}}" class="form-control" required><br> 
+        <label for="consumo"><b>Consumo</b></label>
+        <input type="text" name="consumo" id="" value="{{placa[5]}}" class="form-control" required><br>
+        <label for="soat"><b>Soat</b></label>
+        <input type="date" name="soat" id="" value="{{placa[6]}}"  class="form-control" required><br>
+        <label for="tecno_mec"><b>Tecno Mecanica</b></label>
+        <input type="date" name="tecno_mec" id="" value="{{placa[7]}}" class="form-control" required><br>
+        </div>
+        <div class="col-4">
+        <label for="permiso"><b>Permiso</b></label>
+        <input type="date" name="permiso" id="" value="{{placa[8]}}"  class="form-control" required><br>  
+        <label for="kilometraje"><b>Kilometraje</b></label>
+        <input type="text" name="kilometraje" id="" value="{{placa[9]}}" tabindex="10" class="form-control" required><br> 
+        <label for="img"><b>Imagen</b></label>
+        <input value="{{placa[10]}}" type="text" name="img" class="form-control" ><br> 
+        <label for="precio"><b>Precio</b></label>
+        <input type="number" name="precio" id="" value="{{placa[11]}}" inputmode="numeric" tabindex="12" class="form-control" required><br>
+        <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+        <a href="/catalogo" class="btn btn-primary"> Regresar</a><br><br>
+    </form>
+</body>
+</html>

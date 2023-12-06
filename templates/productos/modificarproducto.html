@@ -1,0 +1,46 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/actualizaproducto" method="post" enctype="multipart/form-data">
+        <h3>Modificar datos del producto</h3><hr>
+        <div class="row">
+            <div class="col-4">
+                <label for="numero"><b>Id producto</b></label>
+                <input readonly value="{{prod[0]}}" class="form-control" type="number" name="numero">
+                {{mensaje}}
+                <br>
+                <label for="nomProd"><b>Nombre del producto</b></label>
+                <input readonly value="{{prod[1]}}"  class="form-control"  type="text" name="nomProd">
+                <br>
+                <label for="descripcion"><b>Categoria</b></label>
+                <input readonly required value="{{prod[2]}}" class="form-control" type="text" name="descripcion">
+                <br>
+                <label for="cantidad"><b>Cantidad</b></label>
+                <input required value="{{prod[3]}}"  class="form-control"  type="number" name="cantidad">
+                <br></div>
+                <div class="col-4">
+                <label for="precio"><b>Precio Unitario</b></label>
+                <input required value="{{prod[4]}}" class="form-control" type="number" name="precio">
+                <br>
+                <label for="iva"><b>Iva</b></label>
+                <input required step="any" value="{{prod[5]}}" class="form-control" type="number" name="iva">
+                <br>
+                <label for="estado"><b>Estado</b></label>
+                <select required value="{{prod[6]}}"class="form-control" type="text" name="estado">
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="NO DISPONIBLE">NO DISPONIBLE</option>
+                    </option>
+                </select>
+                <br>
+                <label for="foto"><b>Foto</b></label><br>
+                <input value="{{prod[7]}}" class="form-control" type="file" name="foto">
+                <br><br>
+                </div>
+                <div class="col-4"><br>
+                <img width="250" height="250" src="/uploads/{{prod[7]}}" alt=""><br><br><br>
+                <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                <a href="/productos" class="btn btn-primary"> Regresar</a>
+                </div>
+        </form>
+</div>
+</body>
+</html>

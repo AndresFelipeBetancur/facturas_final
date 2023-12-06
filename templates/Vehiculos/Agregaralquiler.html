@@ -1,0 +1,38 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Agregar Alquiler</h3>
+    <hr>
+    {{mensaje}}
+    <div class="row">
+        <div class="col-6">
+    <form action="/agregaralq" class="formulario" method="post">
+        <label for="id_alquiler"><b>ID Alquiler</b></label>
+        <input type="number"  name="id_alquiler" id="id_alquiler"class="form-control" >  
+        <br>
+        <label for="placa" class="placa"><b>ID Placa</b></label>
+        <input type="text" name="placa" id="placa" class="form-control">  
+        <br>
+        <label for="id_registro" class="id_registro"><b>ID Registro</b></label>
+        <input type="text" name="id_registro" id="id_registro" class="form-control"> 
+        <br> 
+        <label for="num_licencia" ><b>Num Licencia</b></label>
+        <input type="number" name="num_licencia" id="num_Licencia" class="form-control">  
+        <br>
+        </div>
+        <div class="col-6">
+        <label for="fecha_alquiler"  class="fecha_alquiler"><b>Fecha Alquiler</b></label>
+        <input type="date" name="fecha_alquiler" id="fecha_alquiler" class="form-control">
+        <br>   
+        <label for="fecha_devolucion" class="fecha_devolucion"><b>Fecha devolucion</b></label>
+        <input type="date" name="fecha_devolucion" id="fecha_devolucion" class="form-control"><br>  
+        <label for="ID_Comanda" ><b>ID Comanda</b></label>
+        <input type="text" name="ID_Comanda" id="ID_Comanda" class="form-control">
+        <br>  
+        <label for="comentario"><b>Comentario</b></label>
+        <input type="text" name="comentario" id="comentario" class="form-control" >
+        <br> 
+        <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+        <a href="/alquiler" class="btn btn-primary"> Regresar</a><br><br>
+    </form>
+</body>
+</html>

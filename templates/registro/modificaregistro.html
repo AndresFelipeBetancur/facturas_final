@@ -1,0 +1,34 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Modificar registro</h3>
+    <hr>
+    <div class="container"><br>
+        <form action="/actualizaregistro" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <label for="numero"><b>Id registro</b></label>
+                    <input readonly value="{{reg[0]}}" class="form-control" type="number" name="numero">
+                    {{mensaje}}
+                    <br>
+                    <label for="idcliente"><b>Habitación</b></label>
+                    <input value="{{reg[1]}}" class="form-control" type="text" name="idcliente">
+                    <br>
+                    <label for="idhabitacion"><b>Id Cliente</b></label>
+                    <input value="{{reg[2]}}" class="form-control" type="text" name="idhabitacion">
+                    <br>
+                </div>
+                <div class="col-6">
+                    <label for="fecha_inicio"><b>Fecha Llegada</b></label>
+                    <input required value="{{reg[3]}}" class="form-control" type="text" name="fecha_inicio">
+                    <br>
+                    <label for="fecha_final"><b>Fecha Salida</b></label>
+                    <input required value="{{reg[4]}}" class="form-control" type="text" name="fecha_final">
+                    <br>
+                    <label for="precio"><b>Precio</b></label>
+                    <input required value="{{reg[5]}}" class="form-control" type="number" \ name="precio">
+                    <br><br>
+                    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                    <a href="/registro" class="btn btn-primary"> Regresar</a>
+                </div>
+        </form>
+    </div><br>

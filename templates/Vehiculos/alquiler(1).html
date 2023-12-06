@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Vehículos Alquilados</h3>
+    <hr>
+    <a href="/agregaralquiler" class="btn btn-success btn-sm">
+        <i class="fas fa-plus-circle"></i> Nuevo Alquiler</a>
+        <a href="/catalogo" class="btn btn-success btn-sm">
+            <i class="fas fa-arrow-circle-left"></i> Ver catalogo</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                  <th>ID Alquiler</th>
+                  <th>Placa</th>
+                  <th>ID registro</th>
+                  <th>Licencia No</th>
+                  <th>Fecha Alquiler</th>
+                  <th>Fecha Devolucion</th>
+                  <th>ID Comanda</th>
+                  <th>Comentario</th>
+                <th colspan="2">Acciones</th>
+               </tr>
+           </thead>
+        <tbody>
+            {% for pro in res %}
+            <tr>
+                <td>{{pro[0]}}</td>
+                <td>{{pro[1]}}</td>
+                <td>{{pro[2]}}</td>
+                <td>{{pro[3]}}</td>
+                <td>{{pro[4]}}</td>
+                <td>{{pro[5]}}</td>
+                <td>{{pro[6]}}</td>
+                <td>{{pro[7]}}</td>
+<td>
+    <a href="/modificaalquiler/{{pro[0]}}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+    <a onclick="return confirm('¿Seguro desea eliminar este vehiculo?')" href="/borraralquiler/{{pro[0]}}"
+        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+</div>
+</body>
+</html>

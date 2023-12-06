@@ -1,0 +1,57 @@
+{% include 'header.html' %}
+    <link rel="stylesheet" href="../static/CSS/facturas.css">
+    <script src="/Static/JS/Javascript.js"></script>
+</head>
+
+
+<title>Hotel Maravilla Natural</title>
+</head>
+<br>
+<div class="container">
+    <h3>Facturación</h3>
+    <hr>
+      <main id="gran_padre">
+        {% if msg %}
+            <section id="padre_comenta_resultado1">
+                    <h4><b>{{msg}}</b></h4>
+            </section>
+        {% endif %}
+        {% if msg1 %}
+            <section id="padre_comenta_resultado2">
+                    <h4><b>{{msg1}}</b></h4>
+            </section>
+        {% endif %}
+        <table class="table table-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Factura No</th>
+                    <th>Registro No</th>
+                    <th>Cliente No</th>
+                    <th>Comanda No</th>
+                    <th>Fecha</th>
+                    <th>Total Pagar</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for fact in res %}
+                <tr>
+                    <td>{{fact[0]}}</td>
+                    <td>{{fact[1]}}</td>
+                    <td>{{fact[2]}}</td>
+                    <td>{{fact[3]}}</td>
+                    <td>{{fact[4]}}</td>
+                    <td>{{fact[5]}}</td>
+                    <td>
+                        <a onclick="return confirm('¿Seguro de que desea eliminar esta factura?')" href="/borrafactura/{{fact[0]}}"
+                            class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                    </td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </main>
+</body>
+</html>

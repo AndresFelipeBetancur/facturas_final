@@ -1,0 +1,46 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/actualizahabitacion" method="post" enctype="multipart/form-data">
+        <h3>Modificar datos del habitacion</h3>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                <label for="numero"><b>Id habitacion</b></label>
+                <input readonly value="{{hab[0]}}" class="form-control" type="number" name="numero">
+                {{mensaje}}
+                <br>
+                <label for="tipo"><b>Tipo</b></label>
+                <input value="{{hab[1]}}" class="form-control" type="text" name="tipo">
+                <br>
+                <label for="descripcion"><b>Descripción</b></label>
+                <input required value="{{hab[2]}}" class="form-control" type="text" name="descripcion">
+                <br>
+                </div>
+                <div class="col-4">
+                <label for="capacidad"><b>Capacidad</b></label>
+                <input required value="{{hab[3]}}" class="form-control" type="number" name="capacidad">
+                <br>
+                <label for="precio"><b>Precio</b></label>
+                <input required value="{{hab[4]}}" class="form-control" type="number" name="precio">
+                <br>
+                <label for="estado"><b>Estado</b></label>
+                    <select required class="form-control" name="estado">
+                    <option value="DISPONIBLE">DISPONIBLE</option>
+                    <option value="OCUPADA">OCUPADA</option>
+                    <option value="LIMPIEZA">LIMPIEZA</option>
+                    <option value="FUERA DE SERVICIO">FUERA DE SERVICIO</option>
+                    </option>
+                </select>
+                <br>
+                </div>
+                <div class="col-4">
+                <img width="195" height="195" src="/uploads/{{hab[6]}}" alt=""><br><br>
+                <input value="{{hab[6]}}" class="form-control" type="file" name="foto">
+                <br><br>
+                <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                <a href="/habitaciones" class="btn btn-primary"> Regresar</a>
+            </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% include 'header.html' %}
+    <link rel="stylesheet" href="../static/CSS/facturas.css">
+    <script src="/Static/JS/Javascript.js"></script>
+    <script>
+        function validateForm() {
+            var inputValue = document.getElementById("barra_busqueda").value;
+            if (inputValue.trim().length === 0) {
+                alert("Por favor, ingresa al menos un carácter.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <title>Hotel Maravilla Natural</title>
+</head>
+<br>
+<div class="container">
+    <h3>Facturación</h3>
+    <hr>
+    
+    {% if request.args.get('msg2') %}
+        <p><b>{{ request.args.get('msg2') }}</b></p>
+    {% endif %}
+    {% if request.args.get('msg1') %}
+        <p><b>{{ request.args.get('msg1') }}</b></p>
+    {% endif %}
+    
+    <div id="contenedor_superior">
+        <div id="contenedor_acciones">
+
+            <div id="contenedor_busqueda" >
+                {{msg}}
+              
+                
+                <form method="post" onsubmit="return validateForm()"  id="formulario_1" action="/agregafactura">
+                    <label class="elementos_formulario" id="label_barra_factura" for="idregistro">Realizar una factura</label>
+                    <input id="input_form1" placeholder="Id del registro del huesped" type="number" class="form-control"  name="idregistro"></input>
+                    <button  name="idregistro" id="boton_buscar_factura"  type="submit" class="btn btn-success" class="bi bi-arrow-left" >Realizar</button>
+                </form>
+                  
+            </div>
+
+            <div id="contenedor_buscar_factura">
+                <form method="post" onsubmit="return validateForm()" id="formulario_2" action="/buscafactura">
+                    <label class="elementos_formulario" id="label_busca_factura" for=""></label>
+                    <input id="input_form2" placeholder="Buscar factura" type="text" class="form-control" name="idfactura"></input>
+                    <button  id="boton_buscar"  type="submit" class="btn btn-success" class="bi bi-arrow-left">Buscar</button>
+                </form>
+
+            
+
+            </div>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Factura No</th>
+                <th>Registro No</th>
+                <th>Cliente No</th>
+                <th>Comanda No</th>
+                <th>Fecha</th>
+                <th>Total Pagar</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for fact in res %}
+            <tr>
+                <td>{{fact[0]}}</td>
+                <td>{{fact[1]}}</td>
+                <td>{{fact[2]}}</td>
+                <td>{{fact[3]}}</td>
+                <td>{{fact[4]}}</td>
+                <td>{{fact[5]}}</td>
+                <td>
+                    <a id="boton_ver" href="/modificaventa/{{fact[0]}}" class="btn btn-primary btn-sm"><i class="bi bi-printer"></i></a>  
+                    <a onclick="return confirm('¿Seguro de que desea eliminar esta factura?')" href="/borraventa/{{fact[0]}}"
+                        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

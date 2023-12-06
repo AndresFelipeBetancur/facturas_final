@@ -1,0 +1,56 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Catálogo de Vehículos</h3>
+    <hr>
+    <a href="/agregarauto" class="btn btn-success btn-sm">
+        <i class="fas fa-car"></i> Nuevo Vehiculo</a>
+        <a href="/alquiler" class="btn btn-success btn-sm">
+            <i class="fas fa-plus-circle"></i> Alquilar Vehiculo</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+                  <tr>
+                      <th>Placa</th>
+                      <th>Tipo</th>
+                      <th>Marca</th>
+                      <th>#</th>
+                      <th>Estado</th>
+                      <th>Consumo/KML</th>
+                      <th>SOAT</th>
+                      <th>TecnMec</th>
+                      <th>Permiso</th>
+                      <th>Kilometraje</th>
+                      <th>imagen</th>
+                      <th>Precio</th>
+                      <th colspan="2">Acciones</th>
+                  
+                  </tr>
+              </thead>
+              <tbody>
+              {% for pro in res %}
+                  <tr>
+                      <td>{{pro[0]}}</td>
+                      <td>{{pro[1]}}</td>
+                      <td>{{pro[2]}}</td>
+                      <td>{{pro[3]}}</td>
+                      <td>{{pro[4]}}</td>
+                      <td>{{pro[5]}}</td>
+                      <td>{{pro[6]}}</td>
+                      <td>{{pro[7]}}</td>
+                      <td>{{pro[8]}}</td>
+                      <td>{{pro[9]}}</td>
+                      <td><img width="50" height="50" src="/uploads/vehiculo.png" alt=""></td>
+                      <td>{{pro[11]}}</td>
+<td>
+    <a href="/modificavehiculo/{{pro[0]}}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+    <a onclick="return confirm('¿Seguro desea eliminar este vehiculo?')" href="/borrarauto/{{pro[0]}}"
+        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+</td>
+</tr>
+{% endfor %}
+              </tbody>
+          </table>
+      </div>   
+  </main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Punto de Venta</h3>
+    <hr>
+    <a href="/agregaventa" class="btn btn-success btn-sm">
+        <i class="fas fa-shopping-cart"></i> Registro ventas</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Id Venta</th>
+                <th>Comanda</th>
+                <th>Categoria</th>
+                <th>Producto</th>
+                <th>Registro</th>
+                <th>Cliente</th>
+                <th>Habitación</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Valor</th>
+                <th>Subtotal</th>
+                <th>Estado</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vent in res %}
+            <tr>
+                <td>{{vent[0]}}</td>
+                <td>{{vent[1]}}</td>
+                <td>{{vent[2]}}</td>
+                <td>{{vent[3]}}</td>
+                <td>{{vent[4]}}</td>
+                <td>{{vent[5]}}</td>
+                <td>{{vent[6]}}</td>
+                <td>{{vent[7]}}</td>
+                <td>{{vent[8]}}</td>
+                <td>{{vent[9]}}</td>
+                <td>{{vent[10]}}</td>
+                <td>{{vent[11]}}</td>
+                <td colspan="2">
+                    <a href="/modificaventa/{{vent[0]}}" class="btn btn-warning btn-sm"><i
+                            class="bi bi-pencil-square"></i></a>
+                    <a onclick="return confirm('¿Seguro elimina este venta?')" href="/borraventa/{{vent[0]}}"
+                        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

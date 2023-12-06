@@ -1,0 +1,39 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Registro</h3>
+    <hr>
+    <a href="/agregaregistro" class="btn btn-success btn-sm">
+    <i class="fas fa-book"></i> Nuevo Registro</a>
+    <br><br>
+    <table class="table table-sm">
+        <thead class="table-dark">
+              <tr>
+                <th>ID Registro</th>
+                <th>ID Cliente</th>
+                <th>ID Habitación</th>
+                <th>Fecha Llegada</th>
+                <th>Fecha Salida</th>
+                <th>Precio</th>
+                <th colspan="2">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                     {% for reg in res %}
+                        <tr>
+                            <td>{{reg[0]}}</td>
+                            <td>{{reg[1]}}</td>
+                            <td>{{reg[2]}}</td>
+                            <td>{{reg[3]}}</td>
+                            <td>{{reg[4]}}</td>
+                            <td>{{reg[5]}}</td>
+                            <td>
+                            <a href="/modificaregistro/{{reg[0]}}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a onclick="return confirm('¿Seguro elimina este producto?')" href="/borraregistro/{{reg[0]}}"
+                                class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>

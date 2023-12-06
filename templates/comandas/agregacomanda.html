@@ -1,0 +1,76 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <form action="/guardacomanda" method="post" enctype="multipart/form-data">
+        <h3>Venta de Productos</h3>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                {{mensaje}}
+                <label for="numero"><b>Comanda No</b></label><br>
+                <input required type="number" class="form-control" name="numero">
+                <br>
+            <label for="idcodigo"><b>Categoria</b></label><br>
+            <select required class="form-control" name="idcodigo">
+                <option value="PRODUCTO">PRODUCTO</option>
+                <option value="SERVICIO">SERVICIO</option>
+                </option>
+            </select>
+                <br>
+                <label for="descripItem"><b>Productos/Servicios</b></label>
+                <select required class="form-control" name="descripItem">
+                    {% for i in prod %}
+                    <option value="{{i[0]}}">{{i[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="idregistro"><b>Registro</b></label><br>
+                <select class="form-control" name="idregistro">
+                    {% for r in reg %}
+                    <option value="{{r[0]}}">{{r[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br></div>
+                <div class="col-4">
+                <label for="idcliente"><b>Cliente</b></label><br>
+                <select required class="form-control" name="idcliente">
+                    {% for p in cli %}
+                    <option value="{{p[0]}}">{{p[0]}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label for="idhabitacion"><b>Alojamiento No</b></label><br>
+                <select required class="form-control" name="idhabitacion">
+                {% for h in hab %}
+                <option value="{{h[0]}}">{{h[0]}}</option>
+                {% endfor %}
+                </select>
+                <br>
+                <label for="fecha"><b>Fecha</b></label><br>
+                <input required type="date" class="form-control" name="fecha">
+                <br>  
+                <label for="cantidad"><b>Cantidad/Duración</b></label><br>
+                <input required step="any" type="number" class="form-control" name="cantidad" value="1">
+                <br></div>
+                <div class="col-4">
+                <label for="valor"><b>Valor</b></label><br>
+                <input required step="any" type="number" class="form-control" name="valor">
+                <br>
+                <label for="subtotal"><b>Subtotal</b></label><br>
+                <input required step="any" type="number" class="form-control" name="subtotal">
+                <br>
+                <label for="estado"><b>Estado</b></label><br>
+                <select required class="form-control" name="estado">
+                    <option value="Por pagar">Por pagar</option>
+                    <option value="Cancelado">Cancelado</option>
+                    </option>
+                </select>
+                <br>
+                <input hidden type="file" class="form-control" name="foto">
+                <br><br>
+            <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+            <a href="/comandas" class="btn btn-primary"> Regresar</a><br><br>
+            </div>
+    </form>
+</div>
+</body>
+</html>

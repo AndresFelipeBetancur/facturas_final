@@ -1,0 +1,41 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Agregar Reservas</h3>
+    <hr>
+    <div class="container"><br>
+        <form action="/guardareserva" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    {{mensaje}}
+                    <label for="numero"><b>Id Reserva</b></label><br>
+                    <input required type="number" class="form-control" name="numero">
+                    <br>
+                    <label for="idcliente"><b>Cliente</b></label><br>
+                    <select required class="form-control" name="idcliente">
+                        {% for c in clie %}
+                        <option value="{{c[0]}}">{{c[0]}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <label for="idhabitacion"><b>Habitación</b></label><br>
+                    <select required class="form-control" name="idhabitacion">
+                        {% for h in hab %}
+                        <option value="{{h[0]}}">{{h[0]}}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    </div>
+                    <div class="col-6">
+                    <label for="fecha_inicio"><b>Fecha Llegada</b></label>
+                    <input required type="date" class="form-control" name="fecha_inicio">
+                    <br>
+                    <label for="fecha_final"><b>Fecha Salida</b></label>
+                    <input required type="date" class="form-control" name="fecha_final">
+                    <br>
+                    <label for="cant_personas"><b>Acompañantes</b></label>
+                    <input required type="number" class="form-control" name="cant_personas">
+                    <br><br>
+                    <input type="submit" class="btn btn-success float-right" class="bi bi-arrow-left" value="Guardar">
+                </div>
+        </form>
+    </div>

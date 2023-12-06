@@ -1,0 +1,51 @@
+{% include 'header.html' %}
+<div class="container"><br>
+    <h3>Agregar habitacion</h3>
+    <hr>
+    <div class="container"><br>
+        <form action="/guardahabitacion" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-4">
+                    {{mensaje}}
+                    <label for="numero"><b>Id Habitación</b></label><br>
+                    <input required type="number" class="form-control" name="numero">
+                    <br>
+                    <label for="tipo"><b>Tipo</b></label><br>
+                    <select required class="form-control" name="tipo">
+                        <option value="ESTANDAR">ESTANDAR</option>
+                        <option value="DE LUJO">DE LUJO</option>
+                        <option value="SUITE">SUITE</option>
+                        <option value="CABAÑA">CABAÑA</option>
+                        </option>
+                    </select>
+                    <br>
+                    <label for="descripcion"><b>Descripción</b></label><br>
+                    <textarea required class="form-control" rows="1" name="descripcion"></textarea>
+                    <br>
+                    </div>
+                    <div class="col-4">
+                    <label for="capacidad"><b>Capacidad</b></label>
+                    <input required type="text" class="form-control" name="capacidad">
+                    <br>
+                    <label for="precio"><b>Precio</b></label>
+                    <input required type="number" class="form-control" name="precio">
+                    <br>
+                    <label for="estado"><b>Estado</b></label><br>
+                    <select required class="form-control" name="estado">
+                        <option value="DISPONIBLE">DISPONIBLE</option>
+                        <option value="OCUPADA">OCUPADA</option>
+                        <option value="LIMPIEZA">LIMPIEZA</option>
+                        <option value="FUERA DE SERVICIO">FUERA DE SERVICIO</option>
+                        </option>
+                    </select>
+                    <br>
+                    </div>
+                    <div class="col-4">
+                    <img width="195" height="195" src="/uploads/default.png" alt=""><br><br>
+                    <input type="file" class="form-control" name="foto" required>                  
+                    <br><br>
+                    <input type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Guardar">
+                    <a href="/habitaciones" class="btn btn-primary"> Regresar</a><br><br>
+                </div>
+        </form>
+    </div>

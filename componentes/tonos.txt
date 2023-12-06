@@ -1,0 +1,12 @@
+Tono rojo #95413B
+
+Tono verde #6BBF90
+
+Tono Azul Intenso #021159
+
+
+Verde-m #04401E
+Cafe-m #594302
+Amarillo-m #F2C12E
+Gris-m #F2F2F2
+Negro-m #0D0D0D
