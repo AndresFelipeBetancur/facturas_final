@@ -15,11 +15,7 @@ class Facturas:
 # Funcion agregar
 
     def guardar(self, fact,fecha,idCliente,idFactura):    
-    
-        
-        sql = f"INSERT INTO facturas (idFactura,idRegistro, idCliente, fecha, total, idComanda) VALUES ({idFactura},{fact[0]},{idCliente},'{fecha}',{fact[1]},{fact[2]})"
-        
-        print("Consulta SQL:", sql)  
+        sql = f"INSERT INTO facturas (idFactura,idRegistro, idCliente, fecha, total, idComanda) VALUES ({idFactura},{fact[0]},{idCliente},'{fecha}',{fact[1]},{fact[2]})"  
         self.cursor.execute(sql)
         self.conDB.commit()
         sql = f"UPDATE `comandas` SET `estado`='pagado' WHERE idcliente = {idCliente}"
@@ -28,8 +24,8 @@ class Facturas:
         
 # Funcion buscar
         
-    def buscar(self,num):
-        sql=f"SELECT * FROM facturas WHERE idfactura={num} AND borrado=0"
+    def buscar(self,fecha):
+        sql=f"SELECT * FROM facturas WHERE fecha='{fecha}' AND borrado=0;"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
@@ -45,7 +41,7 @@ class Facturas:
 
 #se buscan los registros de consumo del huesped para llenar la factura
     def realizar(self,num):
-        sql = f"SELECT * FROM comandas WHERE idregistro={num}"
+        sql = f"SELECT * FROM comandas WHERE idcliente={num}"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
@@ -53,12 +49,12 @@ class Facturas:
 
     
     def buscar_id_comanda(self,num):
-        sql = f"SELECT idcomanda FROM comandas WHERE idRegistro={num} LIMIT 1"
+        sql = f"SELECT idcomanda FROM comandas WHERE idcliente={num} LIMIT 1"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
-        return resultado[0]
-        print(resultado)
+        return resultado[0][0]
+
         
 # Funcion actualizar
     
@@ -80,8 +76,8 @@ class Facturas:
     def info_cliente(self, id):
         sql = f"""SELECT clientes.idcliente, clientes.nombre, clientes.celular
                 FROM clientes
-                JOIN comandas ON clientes.idcliente = comandas.idregistro
-                WHERE comandas.idregistro = {id}
+                JOIN comandas ON clientes.idcliente = comandas.idcliente
+                WHERE comandas.idcliente = {id}
                 LIMIT 1;"""
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
@@ -96,7 +92,7 @@ class Facturas:
         return resultado
        
     def info_hospedaje(self,id):
-        sql = f"SELECT registro.idhabitacion, registro.fecha_inicio, registro.fecha_final, habitaciones.precio, habitaciones.capacidad, habitaciones.tipo FROM habitaciones habitaciones JOIN registro ON habitaciones.idhabitacion = registro.idhabitacion WHERE registro.idregistro = '{id}'"
+        sql = f"SELECT registro.idhabitacion, registro.fecha_inicio, registro.fecha_final, habitaciones.precio, habitaciones.capacidad, habitaciones.tipo FROM habitaciones habitaciones JOIN registro ON habitaciones.idhabitacion = registro.idhabitacion WHERE registro.idcliente = '{id}'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
@@ -104,21 +100,21 @@ class Facturas:
     
 
     def info_productos(self,id):
-        sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idregistro={id} AND borrado=0 AND tipoVenta='producto' AND estado='por pagar'"
+        sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idcliente={id} AND borrado=0 AND idcodigo='PRODUCTO' AND estado='por pagar'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
         return resultado
     
     def info_servicios(self,id):
-        sql = f"SELECT idcodigo,descripItem,duracion,valor,fecha FROM comandas WHERE idregistro={id} AND borrado=0 AND tipoVenta='servicio' AND estado='por pagar'"
+        sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idcliente={id} AND borrado=0 AND idcodigo='SERVICIO' AND estado='por pagar'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
         return resultado
     
     def info_alquiler(self,id):
-        sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idregistro={id} AND borrado=0"
+        sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idcliente={id} AND borrado=0 AND idcodigo='ALQUILER' AND estado='por pagar'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()

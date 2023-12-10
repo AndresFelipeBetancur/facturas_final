@@ -1,5 +1,5 @@
 {% include 'header.html' %}
-    <link rel="stylesheet" href="../static/CSS/facturas.css">
+    <link rel="stylesheet" href="../static/CSS/buscafactura.css">
     <script src="/Static/JS/Javascript.js"></script>
 </head>
 
@@ -7,8 +7,8 @@
 <title>Hotel Maravilla Natural</title>
 </head>
 <br>
-<div class="container">
-    <h3>Facturación</h3>
+<div id="container">
+    <b><h3 id="titulo_buscar_factura">Facturación</h3></b>
     <hr>
       <main id="gran_padre">
         {% if msg %}
@@ -47,11 +47,13 @@
                         <a onclick="return confirm('¿Seguro de que desea eliminar esta factura?')" href="/borrafactura/{{fact[0]}}"
                             class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
                     </td>
-    
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         </main>
+        <div id="contenedor_boton">
+            <a  href="/facturas" id="boton" type="submit" class="btn-primary" class="bi bi-arrow-left">Regresar</a>
+        </div>
 </body>
 </html>

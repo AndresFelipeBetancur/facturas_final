@@ -21,48 +21,42 @@
     </script>
     <title>Hotel Maravilla Natural</title>
 </head>
-<ul class="topnav">
-    <li><a href="/principal">Inicio</a></li>
-    <li><a href="#">Registro</a></li>
-    <li><a href="/servicios">Servicios</a></li>
-    <li><a href="/productos">Productos</a></li>
-    <li><a href="/Catalogo">Vehiculos</a></li>
-    <li><a href="/comandas">Ventas</a></li>
-    <li><a class="active" href="facturas">Facturación</a></li>
-    <li><a href="/">Salir</a></li>
-    <li class="right"><img src="/uploads/logo.jpg" alt=""></li>
-</ul>
-</div>
+{% include 'header.html' %}
 <br>
 <div class="container">
     <h3>Facturación</h3>
     <hr>
-<form  onsubmit="return validateForm()" action="/agregafactura" method="post" enctype="multipart/form-data">
     
-    <div contenedor_superior class="row">
+    {% if request.args.get('msg2') %}
+        <p><b>{{ request.args.get('msg2') }}</b></p>
+    {% endif %}
+    {% if request.args.get('msg1') %}
+        <p><b>{{ request.args.get('msg1') }}</b></p>
+    {% endif %}
+    
+    <div id="contenedor_superior"class="row">
         <div id="contenedor_acciones">
-            <div id="contenedor_busqueda" class="col-6">
+
+            <div id="contenedor_busqueda" >
                 {{msg}}
-                <label id="label_barra_factura" for="">Realizar una factura</label>
-                <input id="barra_busqueda" placeholder="Id del registro del huesped" type="text" class="form-control"  name="idregistro"></input>
-                <br>
-                <br></div>
-                <div id="boton_buscar" class="col-6">
-                <br><br>
-                <input class="botones" type="submit" class="btn btn-success" class="bi bi-arrow-left" value="Buscar">
-                <a href="/agregafactura" class="btn btn-primary"> ir al template de facturas</a><br><br>
-            </div>
-            <div id="contenedor_buscar_factura">
-                <form action="">
-                    <label id="label_busca_factura" for="">Buscar una factura</label>
-                    <input id="barra_busqueda" placeholder="Id de la factura" type="text" class="form-control"  name="idregistro"></input>
+                
+                <form method="post" onsubmit="return validateForm()"  id="formulario_1" action="/agregafactura">
+                    <label class="elementos_formulario" id="label_barra_factura" for="idregistro">Realizar una factura</label>
+                    <input id="input_form1" placeholder="ID del huesped" type="number" class="form-control"  name="idregistro"></input>
+                    <button  name="idregistro" id="boton_buscar_factura"  type="submit" class="btn btn-success" class="bi bi-arrow-left" >Realizar</button>
                 </form>
-            </div>   
+    
+            </div>
+
+            <div id="contenedor_buscar_factura">
+                <form method="post" onsubmit="return validateForm()" id="formulario_2" action="/buscafactura">
+                    <label class="elementos_formulario" id="label_busca_factura" for="">Buscar una factura</label>
+                    <input id="input_form2" placeholder="AAAA-MM-DD" type="date" class="form-control" name="idfactura"></input>
+                    <button  id="boton_buscar"  type="submit" class="btn btn-success" class="bi bi-arrow-left">Buscar</button>
+                </form>
+            </div>
         </div>
-</form>
-    <br>
-    <br>
-    <br>
+
     <table class="table table-hover table-sm">
         <thead>
             <tr>
@@ -76,6 +70,7 @@
             </tr>
         </thead>
         <tbody>
+            
             {% for fact in res %}
             <tr>
                 <td>{{fact[0]}}</td>
@@ -85,13 +80,11 @@
                 <td>{{fact[4]}}</td>
                 <td>{{fact[5]}}</td>
                 <td>
-                    <a  href="/imprimirfactura/{{fact[0]}}" class="btn btn-primary btn-sm"><i class="bi bi-printer"></i></a>
-                    <a href="/modificafactura/{{fact[0]}}" class="btn btn-warning btn-sm"><i
-                            class="bi bi-pencil-square"></i></a>
                     <a onclick="return confirm('¿Seguro de que desea eliminar esta factura?')" href="/borrafactura/{{fact[0]}}"
                         class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                    <a id="boton_ver"href="/verfactura/{{fact[0]}}"
+                        class="btn btn-info"><i class="bi bi-eye-fill"></i></a>    
                 </td>
-
             </tr>
             {% endfor %}
         </tbody>

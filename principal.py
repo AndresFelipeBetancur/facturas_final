@@ -6,8 +6,8 @@ from flask import Flask, Response, current_app, make_response, redirect, render_
 import jinja2
 import mysql.connector
 import os
-#import pdfkit # hace uso del programa wkhtmltopdf // instalar esta libreria ----MODULO FELIPE----
-#import webbrowser as vb #instalar esta libreria ----MODULO FELIPE----
+import pdfkit # hace uso del programa wkhtmltopdf // instalar esta libreria ----MODULO FELIPE----
+import webbrowser as vb #instalar esta libreria ----MODULO FELIPE----
 
 
 
@@ -902,7 +902,7 @@ def borrapqrs(id):
 def facturas():
     if session.get('loginOk'):
         resultado = misFacturas.consultar()
-        return render_template("facturas/facturas.html",res=resultado)
+        return render_template("facturas/facturas1.html",res=resultado)
     else:
         return redirect('/')
 
@@ -913,8 +913,7 @@ def buscafactura():
         resultado = misFacturas.buscar(idfactura)
         if resultado:
             mensaje="¡Se han encontrado resultados para su busqueda!"
-            return render_template("facturas/facturaprueba.html",res=resultado,msg=mensaje)
-#Adriana----> return render_template("facturas/buscafactura.html",res=resultado,msg=mensaje)
+            return render_template("facturas/buscafactura.html",res=resultado,msg=mensaje)
         else:
             mensaje = "No se han encontrado resultados para su busqueda"
             return render_template("facturas/buscafactura.html",res=resultado,msg1=mensaje)
@@ -926,10 +925,10 @@ def buscafactura():
 @prog.route('/agregafactura',methods=['POST'])
 def agregafactura():
     if session.get('loginOk'): 
-        resultado = misFacturas.consultar()
+        resultado = misFacturas.consultar() 
         idhuesped = request.form['idregistro']
-        if  not misFacturas.realizar(idhuesped):
-            return render_template("facturas/facturas.html",msg="no se encontro un registro de consumo asociado a este huesped",res=resultado)
+        if not misFacturas.realizar(idhuesped):
+            return render_template("/facturas/facturas1.html",msg="no se encontro un registro de consumo asociado a este huesped",res=resultado)
         else:
             # Obtén la fecha actual
             fecha_actual = date.today()
@@ -937,49 +936,43 @@ def agregafactura():
             fechaActual = fecha_actual.strftime('%Y-%m-%d')
             #Recopilar la informacion de la factura asociada al cliente
             huespedInfo = misFacturas.info_cliente(idhuesped)
-            idFactura = huespedInfo[0][-1]
+            idFactura = huespedInfo[0][-1] 
             idCliente = huespedInfo[0][0]
             #Recopilar la informacion asociada a los productos que consumio el cliente
             productosComsumidos = misFacturas.info_productos(idhuesped)
             subtotalP = []
             productosModificados = []
+            #Si hay productos consumidos se les cobra un iva del 19%
+            #En caso de que no se encuentren productos no se realiza el proceso
             if productosComsumidos:
                 ivaP = 0.19
-            else:
-                ivaP = 1
-
-            for producto in productosComsumidos:
-                producto_lista = list(producto)
-                cantidad = producto[2]
-                valor = producto[3]
-                subtotal = cantidad * valor * ivaP + valor
-                producto_lista.append(subtotal)
-                subtotalP.append(subtotal)
-                producto_lista.append(ivaP)
-                productosModificados.append(producto_lista)
-
-                #la funcion zip la utilo para combinar la lista productosConsumidos con subtotal ip
-                #esto lo hago debido a que como listas separadas es mucho mas complejo pasarlas a mi template facturas
-                
+                for producto in productosComsumidos:
+                    productoLista = list(producto)
+                    cantidad = producto[2]
+                    valor = producto[3]
+                    subtotal = cantidad * valor * ivaP + valor
+                    productoLista.append(subtotal)
+                    subtotalP.append(subtotal)
+                    productoLista.append(ivaP)
+                    productosModificados.append(productoLista)
             
             #Recopilar la informacion asociada a los servicios que consumio el cliente
-            
             serviciosConsumidos = misFacturas.info_servicios(idhuesped)
             subtotalS = 0
             serviciosModificados = []
             subtotalS = []
+            #Si hay servicios consumidos se les cobra un iva del 19%
+            #En caso de que no se encuentren servicios no se realiza el proceso
             if serviciosConsumidos:
                 ivaS = 0.19
-            else:
-                ivaS = 1
-            for servicio in serviciosConsumidos:
-                servicio_lista=list(servicio)
-                servicio_lista.append(ivaS)
-                valor = servicio_lista[3]
-                subtotal = valor*ivaS+valor
-                servicio_lista.append(subtotal)
-                subtotalS.append(subtotal)
-                serviciosModificados.append(tuple(servicio_lista))
+                for servicio in serviciosConsumidos:
+                    servicioLista=list(servicio)
+                    servicioLista.append(ivaS)
+                    valor = servicioLista[3]
+                    subtotal = valor*ivaS+valor
+                    servicioLista.append(subtotal)
+                    subtotalS.append(subtotal)
+                    serviciosModificados.append(tuple(servicioLista))
             
             #Recopilar informacion del hospedaje del huesped
             detallesHospedaje = misFacturas.info_hospedaje(idhuesped)
@@ -988,50 +981,69 @@ def agregafactura():
             cursor = conexion.cursor()
             sql = f"SELECT nacionalidad FROM clientes WHERE idcliente = {idhuesped}"
             cursor.execute(sql)
-            nacionalidad = cursor.fetchall()
+            nacionalidad = cursor.fetchall()[0][0]
             conexion.commit()
-            if nacionalidad=="colombia":
+            
+            if nacionalidad=="Colombia":
                 ivaH = 0.19
+                subtotalH = []
+                hospedajeModificados = []
+                hospedaje_combinados = []
+                for hospedaje in detallesHospedaje:
+                    hospedajeLista=list(hospedaje)
+                    valor = hospedajeLista[3]
+                    subtotal = valor*ivaH+valor
+                    subtotalH.append(subtotal)
+                    hospedajeLista.append(subtotal)
+                    hospedajeLista.append(ivaH)
+                    hospedajeModificados.append(tuple(hospedajeLista))
+                    hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
             else:
-                ivaH = 1
-            subtotalH = []
-            hospedajeModificados = []
-            hospedaje_combinados = []
-            for hospedaje in detallesHospedaje:
-                hospedaje_lista=list(hospedaje)
-                valor = hospedaje_lista[3]
-                subtotal =  (valor*ivaH+valor) 
-                subtotalH.append(subtotal)
-                hospedajeModificados.append(tuple(hospedaje_lista))
-                hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
+                ivaH = 0
+                subtotalH = []
+                hospedajeModificados = []
+                hospedaje_combinados = []
+                for hospedaje in detallesHospedaje:
+                    hospedaje_lista=list(hospedaje)
+                    valor = hospedaje_lista[3]
+                    subtotal =  (valor) 
+                    subtotalH.append(subtotal)
+                    hospedajeModificados.append(tuple(hospedaje_lista))
+                    hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
+            
+            #/////////CALCULO DEL TOTAL\\\\\\\\\\\
             total = 0
+            #SI HAY SERVICIOS PERO NO PRODUCTOS
             if serviciosModificados and not productosModificados:
                 #calcular el total de la factura
-                
-                for tupla_principal, fecha in hospedaje_combinados:
-                    valor_en_indice_2 = tupla_principal[3]
-                    total += valor_en_indice_2
+                for hospedaje in hospedaje_combinados:
+                    indice2 = hospedaje[1]
+                    total += indice2
                     total += sum(subtotalS)
                 return render_template("facturas/nuevafactura.html",servicios=serviciosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=detallesHospedaje,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
+            #SI HAY PRODUCTOS PERO NO SERVICIOS
             elif productosModificados and not serviciosModificados:
                 #calcular el total de la factura
-                for tupla_principal, fecha in hospedaje_combinados:
-                    valor_en_indice_2 = tupla_principal[3]
-                    total += valor_en_indice_2
+                for hospedaje in hospedaje_combinados:
+                    indice2 = hospedaje[1]
+                    total += indice2
                     total += sum(subtotalP)
-                return render_template("facturas/nuevafactura.html",productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=detallesHospedaje,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
+                return render_template("facturas/nuevafactura.html",productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
+            #SI HAY SERVICIOS Y PRODUCTOS
             elif serviciosModificados and productosModificados:
-                for tupla_principal, fecha in hospedaje_combinados:
-                    valor_en_indice_2 = tupla_principal[3]
-                    total += valor_en_indice_2
+                for hospedaje in hospedaje_combinados:
+                    indice2 = hospedaje[1]
+                    total += indice2
                     total += sum(subtotalS)  
                     total += sum(subtotalP)
-                return render_template("facturas/nuevafactura.html",servicios=serviciosModificados,productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=detallesHospedaje,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
+                return render_template("facturas/nuevafactura.html",servicios=serviciosModificados,productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
+            #EN CASO DE QUE NO EXISTA UN REGISTRO DE CONSUMO DE SERVICIOS Y PRODUCTOS
+            #SE HACE UN CALCULO DEL TOTAL SOLO CON EL REGISTRO DE HOSPEDAJE
             else:
                 #calcular el total de la factura
-                for tupla_principal, fecha in hospedaje_combinados:
-                    valor_en_indice_2 = tupla_principal[3]
-                    total += valor_en_indice_2
+                for hospedaje in hospedaje_combinados:
+                    indice2 = hospedaje[1]
+                    total += indice2
                     total += sum(subtotalP)
                 return render_template("facturas/nuevafactura.html",idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
     else:
@@ -1050,89 +1062,96 @@ def guardafactura(id,total):
         huespedInfo = misFacturas.info_cliente(idhuesped)
         idFactura = huespedInfo[0][-1]
         idCliente = huespedInfo[0][0]
-        #se imprimer la factura
+        
         #Recopilar la informacion asociada a los productos que consumio el cliente
         productosComsumidos = misFacturas.info_productos(idhuesped)
         subtotalP = []
         productosModificados = []
-        ivaP = 0.19
-
-        for producto in productosComsumidos:
-            producto_lista = list(producto)
-            cantidad = producto[2]
-            valor = producto[3]
-            subtotal = cantidad * valor * ivaP + valor 
-            producto_lista.append(subtotal)
-            subtotalP.append(subtotal)
-            producto_lista.append(ivaP)
-            productosModificados.append(producto_lista)
+        #Si hay productos consumidos se les cobra un iva del 19%
+        #En caso de que no se encuentren productos no se realiza el proceso
+        if productosComsumidos:
+            ivaP = 0.19
+            for producto in productosComsumidos:
+                producto_lista = list(producto)
+                cantidad = producto[2]
+                valor = producto[3]
+                subtotal = cantidad * valor * ivaP + valor
+                producto_lista.append(subtotal)
+                subtotalP.append(subtotal)
+                producto_lista.append(ivaP)
+                productosModificados.append(producto_lista)
             
         #Recopilar la informacion asociada a los servicios que consumio el cliente
-            
         serviciosConsumidos = misFacturas.info_servicios(idhuesped)
         subtotalS = 0
         serviciosModificados = []
         subtotalS = []
-        ivaS = 0.19
-        for servicio in serviciosConsumidos:
-            servicio_lista=list(servicio)
-            servicio_lista.append(ivaS)
-            valor = servicio_lista[3]
-            subtotal = valor*ivaS+valor
-            servicio_lista.append(subtotal)
-            subtotalS.append(subtotal)
-            serviciosModificados.append(tuple(servicio_lista))
+        #Si hay servicios consumidos se les cobra un iva del 19%
+        #En caso de que no se encuentren servicios no se realiza el proceso
+        if serviciosConsumidos:
+            ivaS = 0.19
+            for servicio in serviciosConsumidos:
+                servicio_lista=list(servicio)
+                servicio_lista.append(ivaS)
+                valor = servicio_lista[3]
+                subtotal = valor*ivaS+valor
+                servicio_lista.append(subtotal)
+                subtotalS.append(subtotal)
+                serviciosModificados.append(tuple(servicio_lista))
             
         #Recopilar informacion del hospedaje del huesped
         detallesHospedaje = misFacturas.info_hospedaje(idhuesped)
-            
         #consulto la nacionalidad del huesped, si es extranjero no le cobro iva
         cursor = conexion.cursor()
         sql = f"SELECT nacionalidad FROM clientes WHERE idcliente = {idhuesped}"
         cursor.execute(sql)
-        nacionalidad = cursor.fetchall()
+        nacionalidad = cursor.fetchall()[0][0]
         conexion.commit()
-        if nacionalidad=="colombia":
+        if nacionalidad=="Colombia":
             ivaH = 0.19
+            subtotalH = []
+            hospedajeModificados = []
+            hospedaje_combinados = []
+            for hospedaje in detallesHospedaje:
+                hospedaje_lista=list(hospedaje)
+                valor = hospedaje_lista[3]
+                subtotal = valor*ivaH+valor
+                subtotalH.append(subtotal)
+                hospedaje_lista.append(subtotal)
+                hospedaje_lista.append(ivaH)
+                hospedajeModificados.append(tuple(hospedaje_lista))
+                hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
         else:
-            ivaH = 1
-        subtotalH = []
-        hospedajeModificados = []
-        hospedaje_combinados = []
-        for hospedaje in detallesHospedaje:
-            hospedaje_lista=list(hospedaje)
-            valor = hospedaje_lista[3]
-            subtotal =  (valor*ivaH+valor) 
-            subtotalH.append(subtotal)
-            hospedajeModificados.append(tuple(hospedaje_lista))
-            hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
+            ivaH = 0
+            subtotalH = []
+            hospedajeModificados = []
+            hospedaje_combinados = []
+            for hospedaje in detallesHospedaje:
+                hospedaje_lista=list(hospedaje)
+                valor = hospedaje_lista[3]
+                subtotal =  (valor) 
+                subtotalH.append(subtotal)
+                hospedajeModificados.append(tuple(hospedaje_lista))
+                hospedaje_combinados = list(zip(hospedajeModificados,subtotalH))
+            
                 
-           
-        #calcular el total de la factura
-        total = 0
-            
-        for tupla_principal, fecha in hospedaje_combinados:
-            valor_en_indice_2 = tupla_principal[3]
-            total += valor_en_indice_2
-            
-        total += sum(subtotalP)
-            
-        total += sum(subtotalS)
-
-        
+        #EL TOTAL ME LLEGA COMO ARGUMENTO DE LA FUNCION
+        #POR LO TANTO NO DEBO DE CALCULARLO NUEVAMENTE
         
         #Generar pdf
         with open('__pycache__/temp.html', 'w', encoding='utf-8') as temp_file:
-                temp_file.write(render_template("facturas/nuevafactura.html",servicios=serviciosModificados,productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=detallesHospedaje,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total))
-        #pdfkit.from_file('__pycache__/temp.html',f'pdffactura/{idFactura}.pdf',options={"enable-local-file-access": None})
+                temp_file.write(render_template("facturas/nuevafactura.html",servicios=serviciosModificados,productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total))
+        #PIP INSTALL PDFKIT, Y SE DEBE DE IMPORTAR
+        #ADICIONALMENTE SE DEBE DE INSTALLAR UN SOFTWARE EXTERNO: WKHTMLTOPDF
+        pdfkit.from_file('__pycache__/temp.html',f'pdffactura/{idFactura}.pdf',options={"enable-local-file-access": None})
         
-        #Se guarda la factura
+        #SE GUARDAN LOS DATOS DE LA FACTURA
         #se necesita consultar el idComanda
         idcomanda = misFacturas.buscar_id_comanda(idhuesped)
-        factura = [idhuesped,total,idcomanda[0]]
+        factura = [idhuesped,total,idcomanda]
         misFacturas.guardar(factura,fechaActual,idCliente,idFactura)
             
-        session['msg1'] = '¡La factura se guardó exitosamente!'
+        session['msg1'] = '¡La factura se guardó exitosamente! y adicionalmente se genero un pdf en la carpeta pdf-factura.'
         return redirect("/facturas?msg1=¡La factura se guardó exitosamente! y adicionalmente se genero un pdf en la carpeta pdf-factura.")
     else:
         return redirect('/')
@@ -1150,8 +1169,11 @@ def borrafactura(id):
 def verfactura(id):
     if session.get('loginOk'):
         session['msg1'] = 'La factura se abrio en una nueva ventana'
-        ruta_pdf = f'D:/User/Escritorio/Nueva carpeta/HotelMaravillaTPS2023/pdffactura/{id}.pdf'
-        #vb.open_new(ruta_pdf); return redirect("/facturas?msg1=La factura se abrió en una nueva ventana")     
+        #SE DEBE CREAR UNA CARPETA LLAMADA PDFFACTURA AL MISMO NIVEL DE PRINCIPAL
+        ruta_pdf = f'D:/User/Escritorio/FACTURAS_FINAL/pdffactura/{id}.pdf'
+        #import webbrowser as vb ASI SE IMPORTA LA LIBRERIA
+        # ESTA SE USA EN LA LINEA DE ABAJO PARA ABRIR EL PDF DE LA FACTURA
+        vb.open_new(ruta_pdf); return redirect("/facturas?msg1=La factura se abrió en una nueva ventana")     
     else:
         return redirect('/')
     

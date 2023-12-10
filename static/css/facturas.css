@@ -1,0 +1,142 @@
+body {margin: 0;}
+
+
+.botones {
+    background-color: #04AA6D;
+    border: 0;
+    border-radius: 5px;
+    height: 48px;
+    width: 60px;
+    padding-left: 10px;
+    color: greenyellow
+    
+}
+
+#boton_buscar{
+  width: 136px;
+}
+
+.botones:hover {
+    background-color: #208b64;
+}
+
+.elementos_formulario {
+  white-space: nowrap;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  ul.topnav li.right, 
+  ul.topnav li {float: none;}
+}
+
+
+
+#form1 {
+  border-radius: 0;
+
+}
+
+#contenedor_busqueda {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: fit-content;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    height: 50px;
+    
+}
+
+#contenedor_buscar_factura {
+  display: flex;
+  align-items: flex-start;
+  margin-left: 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: fit-content;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  height: 50px;
+
+}
+
+#formulario_1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 580px;
+  margin-left: -4px;
+  height: 50px;
+  flex-direction: row;
+  -ms-flex-align: start;
+}
+
+#formulario_2 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 580px;
+  margin-left: -4px;
+  height: 50px;
+  flex-direction: row;
+  -ms-flex-align: start;
+}
+
+#input_form1{
+  padding-right: 15px;
+}
+
+#input_form2{
+  padding-right: 15px;
+}
+
+#contenedor_boton_buscar {
+    display: flex;
+    align-items: flex-end;
+    
+}
+
+#label_barra_factura{
+    font-family: inherit;
+    font-size: 20px;
+}
+
+#contenedor_acciones{
+    display: flex;
+    height: 200px;
+    width: 100%;
+    align-content: stretch;
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+
+#contenedor_buscar{
+    display: flex;
+    align-content: space-around;
+    width: 100%;
+    height: fit-content;
+    
+}
+
+#label_busca_factura{
+    font-family: inherit;
+    font-size: 20px;
+}
+
+#barra_busqueda{
+    height: 45px;
+    width: 300px;
+}
+
+#boton_ver{
+  padding: 0.375rem 0.75rem;
+  height: 31px;
+  width: 32px;
+  padding: 2px;
+}
