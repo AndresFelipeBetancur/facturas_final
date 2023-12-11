@@ -1020,14 +1020,18 @@ def agregafactura():
                     indice2 = hospedaje[1]
                     total += indice2
                     total += sum(subtotalS)
+                if hospedaje_combinados:
+                    print(f"{total} ESTE ES EL TOTAL CAMPO 1////////")  
                 return render_template("facturas/nuevafactura.html",servicios=serviciosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=detallesHospedaje,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
             #SI HAY PRODUCTOS PERO NO SERVICIOS
             elif productosModificados and not serviciosModificados:
                 #calcular el total de la factura
                 for hospedaje in hospedaje_combinados:
-                    indice2 = hospedaje[1]
-                    total += indice2
+                    indice1 = hospedaje[1]
+                    total += indice1
                     total += sum(subtotalP)
+                if hospedaje_combinados:
+                    print(f"{total} ESTE ES EL TOTAL CAMPO 2////////")    
                 return render_template("facturas/nuevafactura.html",productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
             #SI HAY SERVICIOS Y PRODUCTOS
             elif serviciosModificados and productosModificados:
@@ -1036,6 +1040,8 @@ def agregafactura():
                     total += indice2
                     total += sum(subtotalS)  
                     total += sum(subtotalP)
+                if hospedaje_combinados:
+                    print(f"{total} ESTE ES EL TOTAL CAMPO 3////////")  
                 return render_template("facturas/nuevafactura.html",servicios=serviciosModificados,productos_combinados=productosModificados,idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
             #EN CASO DE QUE NO EXISTA UN REGISTRO DE CONSUMO DE SERVICIOS Y PRODUCTOS
             #SE HACE UN CALCULO DEL TOTAL SOLO CON EL REGISTRO DE HOSPEDAJE
@@ -1045,6 +1051,8 @@ def agregafactura():
                     indice2 = hospedaje[1]
                     total += indice2
                     total += sum(subtotalP)
+                if hospedaje_combinados:
+                    print(f"{total} ESTE ES EL TOTAL CAMPO 4////////")      
                 return render_template("facturas/nuevafactura.html",idCliente=idCliente,idFactura=idFactura,hospedaje=hospedaje_combinados,fecha=fechaActual,cliente=huespedInfo,id=idhuesped,total=total)
     else:
         render_template("/facturas.html")

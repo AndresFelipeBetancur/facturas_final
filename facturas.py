@@ -18,12 +18,15 @@ class Facturas:
         sql = f"INSERT INTO facturas (idFactura,idRegistro, idCliente, fecha, total, idComanda) VALUES ({idFactura},{fact[0]},{idCliente},'{fecha}',{fact[1]},{fact[2]})"  
         self.cursor.execute(sql)
         self.conDB.commit()
+        #ADEMAS DE INSERTAR LOS DATOS DE LA FACTURA EN LA TABLE FACTURA
+        #SE DEBE DE CAMBIAR EL ESTADO DE LOS PRODUCTOS Y SERVICIOS CONSUMIDOS
+        #EN LA TABLA COMANDAS
         sql = f"UPDATE `comandas` SET `estado`='pagado' WHERE idcliente = {idCliente}"
         self.cursor.execute(sql)
         self.conDB.commit()
         
 # Funcion buscar
-        
+        #LAS FACTURAS SE BUSCAN POR SU FECHA DE REALIZACION
     def buscar(self,fecha):
         sql=f"SELECT * FROM facturas WHERE fecha='{fecha}' AND borrado=0;"
         self.cursor.execute(sql)
@@ -55,24 +58,15 @@ class Facturas:
         self.conDB.commit()
         return resultado[0][0]
 
-        
-# Funcion actualizar
-    
-    def actualiza(self,fact):
-        sql = f"UPDATE facturas SET idRegistro='{fact[1]}', idCliente='{fact[2]}',idcomanda='{fact[3]}', fecha='{fact[4]}',total='{fact[5]}' WHERE idfactura={fact[0]}"
-        self.cursor.execute(sql)
-        self.conDB.commit()
-    
+
     # Funcion borrar
-            
     def borrar(self,id):
         sql = f"UPDATE facturas SET borrado=1 WHERE idfactura={id}"
         self.cursor.execute(sql)
         self.conDB.commit()
 
 
-     # Funcion para buscar la informacion basica del cliente
-            
+    # Funcion para buscar la informacion basica del cliente
     def info_cliente(self, id):
         sql = f"""SELECT clientes.idcliente, clientes.nombre, clientes.celular
                 FROM clientes
@@ -82,17 +76,19 @@ class Facturas:
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
-        sql_factura = "SELECT idFactura FROM facturas ORDER BY idFactura DESC LIMIT 1"
-        self.cursor.execute(sql_factura)
-        num_factura = self.cursor.fetchone()[0] + 1
-        huesped_lista = list(resultado[0])
-        huesped_lista.append(num_factura)
-        resultado = [tuple(huesped_lista)]
-
+        #SE CONSULTA EL ULTIMO NUMERO DE LA ULTIMA FACTURA Y SE LE SUMA UNO 
+        sqlId = "SELECT idFactura FROM facturas ORDER BY idFactura DESC LIMIT 1"
+        self.cursor.execute(sqlId)
+        #EL METODO 'FETCHONE LO USO YA QUE SOLO NECESITO RECIBIR UNA SOLA LINEA'
+        numFactura = self.cursor.fetchone()[0] + 1
+        #CONVIERTO RESULTADO EN UNA LISTA YA QUE UNA TUPLA NO SE PUEDE MODIFICAR
+        huespedLista = list(resultado[0])
+        huespedLista.append(numFactura)
+        resultado = [tuple(huespedLista)]
         return resultado
        
     def info_hospedaje(self,id):
-        sql = f"SELECT registro.idhabitacion, registro.fecha_inicio, registro.fecha_final, habitaciones.precio, habitaciones.capacidad, habitaciones.tipo FROM habitaciones habitaciones JOIN registro ON habitaciones.idhabitacion = registro.idhabitacion WHERE registro.idcliente = '{id}'"
+        sql = f"SELECT registro.idhabitacion, registro.fecha_inicio, registro.fecha_final, habitaciones.precio, habitaciones.capacidad, habitaciones.tipo FROM habitaciones habitaciones JOIN registro ON habitaciones.idhabitacion = registro.idhabitacion WHERE registro.idcliente = {id}"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
