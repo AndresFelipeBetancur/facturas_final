@@ -109,10 +109,14 @@ class Facturas:
         self.conDB.commit()
         return resultado
     
+    #EN CASO DE QUE SE REQUIERA SEPARAR LOS SERVICIOS DE ALQUILER DE VEHICULOS 
+    #DE LOS PRODUCTOS Y SERVICIOS CONSUMIDOS.
+    #EN ESE CASO SE DEBE DE AGREGAR LA OPCION ALQUILER EN LA COLUMNA:'idcodigo' DE LA TABLA COMANDAS
+    """
     def info_alquiler(self,id):
         sql = f"SELECT idcodigo,descripItem,cantidad,valor,fecha FROM comandas WHERE idcliente={id} AND borrado=0 AND idcodigo='ALQUILER' AND estado='por pagar'"
         self.cursor.execute(sql)
         resultado = self.cursor.fetchall()
         self.conDB.commit()
         return resultado
-    
+    """

@@ -286,7 +286,7 @@
         </div>
         <br>
         <br>
-        <h3 class="titulo_hospedaje">Detalles del huesped</h2>
+        <b><h3 class="titulo_hospedaje">Detalles del huesped</h3></b>
         <div id="detalles_factura">
             
             <table>
@@ -314,7 +314,7 @@
         </div>
         <br>
         {% if hospedaje %}
-        <h3 class="titulo_hospedaje">Detalles de hospedaje</h3>
+        <b><h3 class="titulo_hospedaje">Detalles de hospedaje</h3></b>
         <div id="detalles_hospedaje">
             
             <table>
@@ -352,13 +352,13 @@
         <br>
         <br>
         {% if productos_combinados %}
-        <h2 class="titulo_hospedaje">Productos Consumidos</h2>
+        <b><h2 class="titulo_hospedaje">Productos Consumidos</h2></b>
         <div id="datos_factura_productos">
             
             <table>
                 <thead>
                     <tr>
-                        <th>ID producto: </th>
+                        <th>Tipo de consumo: </th>
                         <th>Descripción: </th>
                         <th>Cantidad: </th>
                         <th>Precio unitario: </th>
@@ -385,16 +385,16 @@
         </div>
         <br>
         {% if servicios %}
-        <h2 class="titulo_hospedaje">Servicios consumidos</h2>
+        <b><h2 class="titulo_hospedaje">Servicios consumidos</h2></b> 
         <div id="datos_factura_servicios">
             
             <table>
                 <thead>
                     
                     <tr>
-                        <th>ID servicio: </th>
+                        <th>Tipo de consumo: </th>
                         <th>Descripción: </th>
-                        <th>Duración: </th>
+                        <th>Cantidad: </th>
                         <th>Fecha:</th>
                         <th>IVA: </th>
                         <th class="totales">Sub total: </th>
